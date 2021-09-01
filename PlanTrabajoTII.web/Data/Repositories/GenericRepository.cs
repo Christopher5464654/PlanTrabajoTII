@@ -98,8 +98,5 @@ namespace PlanTrabajoTII.web.Data.Repositories
             return await _dataContext.SaveChangesAsync() > 0;
 
         }
-
     }
-
-
 }

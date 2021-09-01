@@ -209,6 +209,5 @@ namespace PlanTrabajoTII.web.Helpers
             await _userManager.DeleteAsync(user);
 
         }
-
     }
 }

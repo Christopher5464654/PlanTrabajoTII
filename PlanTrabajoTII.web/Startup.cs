@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PlanTrabajoTII.web.Data;
 using PlanTrabajoTII.web.Data.Entities;
+using PlanTrabajoTII.web.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,6 +43,12 @@ namespace PlanTrabajoTII.web
             {
                 cfg.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
+
+            services.AddTransient<Seeder>();
+
+            services.AddScoped<IUserHelper, UserHelper>();
+            services.AddScoped<IImageHelper, ImageHelper>();
+
             services.AddControllersWithViews();
         }
 

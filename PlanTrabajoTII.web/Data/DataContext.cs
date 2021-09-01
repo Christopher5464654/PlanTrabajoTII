@@ -7,6 +7,11 @@
 
     public class DataContext : IdentityDbContext<User>
     {
+        public DbSet<Admin> Admins { get; set; }
+        public DbSet<Teacher> Teachers { get; set; }
+        public DbSet<Student> Students { get; set; }
+        public DbSet<Coordinator> Coordinators { get; set; }
+
         public DataContext(DbContextOptions<DataContext> options):base(options)
         {
 
