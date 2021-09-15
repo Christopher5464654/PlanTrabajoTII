@@ -2,10 +2,10 @@
 
 namespace PlanTrabajoTII.web.Data.Entities
 {
-    public class Coordinator : IEntity
+    public class Subject : IEntity
     {
         public int Id { get; set; }
-        public User User { get; set; }
+        public string name { get; set; }
         public ICollection<Course> Courses { get; set; }
     }
 }

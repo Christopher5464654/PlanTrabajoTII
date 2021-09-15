@@ -167,6 +167,41 @@ namespace PlanTrabajoTII.web.Migrations
                     b.ToTable("Admins");
                 });
 
+            modelBuilder.Entity("PlanTrabajoTII.web.Data.Entities.Alert", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.ToTable("Alerts");
+                });
+
+            modelBuilder.Entity("PlanTrabajoTII.web.Data.Entities.Classroom", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Classrooms");
+                });
+
             modelBuilder.Entity("PlanTrabajoTII.web.Data.Entities.Coordinator", b =>
                 {
                     b.Property<int>("Id")
@@ -184,6 +219,85 @@ namespace PlanTrabajoTII.web.Migrations
                     b.ToTable("Coordinators");
                 });
 
+            modelBuilder.Entity("PlanTrabajoTII.web.Data.Entities.Course", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("CoordinatorId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SubjectId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TeacherId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CoordinatorId");
+
+                    b.HasIndex("SubjectId");
+
+                    b.HasIndex("TeacherId");
+
+                    b.ToTable("Courses");
+                });
+
+            modelBuilder.Entity("PlanTrabajoTII.web.Data.Entities.CourseDetail", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("StudentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("CourseDetails");
+                });
+
+            modelBuilder.Entity("PlanTrabajoTII.web.Data.Entities.Schedule", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("ClassroomId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("WeekDayId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClassroomId");
+
+                    b.HasIndex("CourseId");
+
+                    b.HasIndex("WeekDayId");
+
+                    b.ToTable("Schedules");
+                });
+
             modelBuilder.Entity("PlanTrabajoTII.web.Data.Entities.Student", b =>
                 {
                     b.Property<int>("Id")
@@ -199,6 +313,21 @@ namespace PlanTrabajoTII.web.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Students");
+                });
+
+            modelBuilder.Entity("PlanTrabajoTII.web.Data.Entities.Subject", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Subjects");
                 });
 
             modelBuilder.Entity("PlanTrabajoTII.web.Data.Entities.Teacher", b =>
@@ -295,6 +424,21 @@ namespace PlanTrabajoTII.web.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("PlanTrabajoTII.web.Data.Entities.WeekDay", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("WeekDays");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -353,11 +497,59 @@ namespace PlanTrabajoTII.web.Migrations
                         .HasForeignKey("UserId");
                 });
 
+            modelBuilder.Entity("PlanTrabajoTII.web.Data.Entities.Alert", b =>
+                {
+                    b.HasOne("PlanTrabajoTII.web.Data.Entities.Course", "Course")
+                        .WithMany("Alerts")
+                        .HasForeignKey("CourseId");
+                });
+
             modelBuilder.Entity("PlanTrabajoTII.web.Data.Entities.Coordinator", b =>
                 {
                     b.HasOne("PlanTrabajoTII.web.Data.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("PlanTrabajoTII.web.Data.Entities.Course", b =>
+                {
+                    b.HasOne("PlanTrabajoTII.web.Data.Entities.Coordinator", "Coordinator")
+                        .WithMany("Courses")
+                        .HasForeignKey("CoordinatorId");
+
+                    b.HasOne("PlanTrabajoTII.web.Data.Entities.Subject", "Subject")
+                        .WithMany("Courses")
+                        .HasForeignKey("SubjectId");
+
+                    b.HasOne("PlanTrabajoTII.web.Data.Entities.Teacher", "Teacher")
+                        .WithMany("Courses")
+                        .HasForeignKey("TeacherId");
+                });
+
+            modelBuilder.Entity("PlanTrabajoTII.web.Data.Entities.CourseDetail", b =>
+                {
+                    b.HasOne("PlanTrabajoTII.web.Data.Entities.Course", "Course")
+                        .WithMany("CourseDetails")
+                        .HasForeignKey("CourseId");
+
+                    b.HasOne("PlanTrabajoTII.web.Data.Entities.Student", "Student")
+                        .WithMany("DetailCourses")
+                        .HasForeignKey("StudentId");
+                });
+
+            modelBuilder.Entity("PlanTrabajoTII.web.Data.Entities.Schedule", b =>
+                {
+                    b.HasOne("PlanTrabajoTII.web.Data.Entities.Classroom", "Classroom")
+                        .WithMany("Schedules")
+                        .HasForeignKey("ClassroomId");
+
+                    b.HasOne("PlanTrabajoTII.web.Data.Entities.Course", "Course")
+                        .WithMany("Schedules")
+                        .HasForeignKey("CourseId");
+
+                    b.HasOne("PlanTrabajoTII.web.Data.Entities.WeekDay", "WeekDay")
+                        .WithMany("Schedules")
+                        .HasForeignKey("WeekDayId");
                 });
 
             modelBuilder.Entity("PlanTrabajoTII.web.Data.Entities.Student", b =>
