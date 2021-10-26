@@ -1,6 +1,4 @@
-﻿
-
-namespace PlanTrabajoTII.web.Helpers
+﻿namespace PlanTrabajoTII.web.Helpers
 {
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc.Rendering;

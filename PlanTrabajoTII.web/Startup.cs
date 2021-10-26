@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PlanTrabajoTII.web.Data;
 using PlanTrabajoTII.web.Data.Entities;
+using PlanTrabajoTII.web.Data.Repositories;
 using PlanTrabajoTII.web.Helpers;
 using System;
 using System.Collections.Generic;
@@ -48,6 +49,8 @@ namespace PlanTrabajoTII.web
 
             services.AddScoped<IUserHelper, UserHelper>();
             services.AddScoped<IImageHelper, ImageHelper>();
+            services.AddScoped<IClassroomRepository, ClassroomRepository> ();
+            services.AddScoped<IWeekDayRepository, WeekDayRepository>();
 
             services.AddControllersWithViews();
         }
@@ -67,6 +70,7 @@ namespace PlanTrabajoTII.web
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseAuthentication();
 
             app.UseRouting();
 
