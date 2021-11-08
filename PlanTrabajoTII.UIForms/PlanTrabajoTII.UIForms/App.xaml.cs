@@ -1,4 +1,5 @@
-﻿using PlanTrabajoTII.UIForms.Views;
+﻿using PlanTrabajoTII.UIForms.ViewModels;
+using PlanTrabajoTII.UIForms.Views;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -11,6 +12,7 @@ namespace PlanTrabajoTII.UIForms
         {
             InitializeComponent();
 
+            MainViewModel.GetInstance().Login = new LoginViewModel();
             MainPage = new NavigationPage(new LoginPage());
         }
 
