@@ -24,5 +24,4 @@
             OnPropertyChanged(propertyName);
         }
     }
-
 }
